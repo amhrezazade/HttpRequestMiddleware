@@ -3,7 +3,7 @@
 namespace HRMServer.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("")]
     public class HomeController : ControllerBase
     {
 
@@ -16,10 +16,19 @@ namespace HRMServer.Controllers
 
 
         [HttpGet]
-
+        [Route("")]
         public string Get()
         {
             return "Hello from web app";
+        }
+
+
+        [HttpGet]
+        [Route("/end")]
+        public string End([FromQuery] string key)
+        {
+            return "";
+
         }
 
     }

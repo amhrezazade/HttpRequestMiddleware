@@ -1,3 +1,5 @@
+
+
 namespace HRM_Client
 {
     public partial class MainWindow : Form
@@ -10,7 +12,7 @@ namespace HRM_Client
         private void mainWindow_Load(object sender, EventArgs e)
         {
             txtLog.Dock = DockStyle.Fill;
-
+ 
         }
 
     }
