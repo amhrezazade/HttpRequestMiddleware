@@ -1,6 +1,7 @@
 ﻿using HRMDomain.Model;
 using HRMServer.Model;
 using Microsoft.AspNetCore.SignalR;
+using Newtonsoft.Json;
 
 namespace HRMServer.Service
 {
@@ -15,20 +16,34 @@ namespace HRMServer.Service
             contexts = new List<Context>();
         }
 
-        public async Task<long> SetResponse(string data)
+        public void SetResponse(string data)
         {
-            return 0;
+            Response response = JsonConvert.DeserializeObject<Response>(data);
+            Context c = contexts.FirstOrDefault(x => x.Id == response.RequestId);
+            if (c != null) 
+            {
+                c.Response = response;
+            }
         }
 
 
-        public async Task<long> HandleRequest(Request request)
+        public async Task SendRequest(Request request)
         {
-            return 0;
+            contexts.Add(new Context
+            {
+                Request = request,
+                Id = request.Id,
+                Response = null
+            });
+
+            string json = JsonConvert.SerializeObject(request);
+
+            await _hubContext.Clients.All.SendAsync("request", json);
         }
 
-        public async Task<Response> CheckResponse(long Id)
+        public Response CheckResponse(long Id)
         {
-            return null;
+            return contexts.FirstOrDefault(x => x.Id == Id).Response;
         }
 
     }

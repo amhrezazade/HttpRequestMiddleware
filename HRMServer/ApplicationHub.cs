@@ -8,14 +8,16 @@ namespace HRMServer
     {
         private readonly RequestResponseHandlerService _service;
 
+
+
         public ApplicationHub(RequestResponseHandlerService service)
         {
             _service = service;
         }
 
-        public async Task ResponeToRequest(string data)
+        public void ResponeToRequest(string data)
         {
-            await _service.SetResponse(data);
+           _service.SetResponse(data);
         }
     }
 }
