@@ -6,7 +6,6 @@ namespace HRMServer
 {
     public class ReequestSenderMiddleware : IMiddleware
     {
-        private static long count = 0;
         private readonly RequestResponseHandlerService _service;
         public ReequestSenderMiddleware(RequestResponseHandlerService requestResponseHandlerService)
         {
@@ -15,7 +14,7 @@ namespace HRMServer
 
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)
         {
-            if (context.Request.Path.ToString().StartsWith("/Request/"))
+            if (context.Request.Path.StartsWithSegments("/Request"))
             {
                 var res = await SendRequest(context.Request);
                 context.Response.ContentType = res.ContentType;
@@ -30,7 +29,7 @@ namespace HRMServer
 
         private async Task<Response> SendRequest(HttpRequest request)
         {
-            count++;
+            
             string body = "";
 
             if (request.ContentLength is not null && request.ContentLength > 0)
@@ -40,11 +39,14 @@ namespace HRMServer
                 body = Convert.ToBase64String(data);
             }
 
+
+            long Id = _service.GetNewId();
+
             Request requestMessage = new Request()
             {
-                Id = count,
+                Id = Id,
                 Method = request.Method,
-                Path = request.Path.ToString().Substring(9) + request.Query.ToString(),
+                Path = request.Path.ToString().Substring(8) + request.QueryString,
                 Body = body,
                 Headers = request.Headers
                 .Select(x => new HeaderModel()
@@ -57,24 +59,24 @@ namespace HRMServer
 
             await _service.SendRequest(requestMessage);
 
-            await Task.Delay(500);
-
-            const int timeout = 10;
+            const int timeout = 300;
 
             for (int i = 0; i < timeout; i++)
             {
-                var res = _service.CheckResponse(count);
+                var res = _service.CheckResponse(Id);
                 if (res is not null)
                     return res;
-                await Task.Delay(1000);
+                await Task.Delay(500);
             }
+
+            _service.Remove(Id);
 
             return new Response()
             {
                 StatusCode = 503,
-                Body = "Bad Gateway",
-                ContentType = "plain/text",
-                RequestId = count
+                Body = Convert.ToBase64String(Encoding.UTF8.GetBytes("503 - Bad Gateway")),
+                ContentType = "text/html",
+                RequestId = Id
             };
 
         }

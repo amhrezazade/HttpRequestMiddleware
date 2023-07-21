@@ -7,19 +7,16 @@ namespace HRMServer.Controllers
     public class HomeController : ControllerBase
     {
 
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
-
         [HttpGet]
         [Route("")]
-        public string Get()
+        public ContentResult Get()
         {
-            return "Hello from web app";
+            return new ContentResult()
+            {
+                StatusCode = 200,
+                Content = System.IO.File.ReadAllText("Home.html"),
+                ContentType = "text/html"
+            };
         }
 
 

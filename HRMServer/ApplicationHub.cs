@@ -8,8 +8,6 @@ namespace HRMServer
     {
         private readonly RequestResponseHandlerService _service;
 
-
-
         public ApplicationHub(RequestResponseHandlerService service)
         {
             _service = service;
@@ -19,5 +17,12 @@ namespace HRMServer
         {
            _service.SetResponse(data);
         }
+
+        public async override Task OnConnectedAsync()
+        {
+            await base.OnConnectedAsync();
+            await _service.Resend();
+        }
+
     }
 }
