@@ -49,14 +49,15 @@ namespace HRM_Client
 
         }
 
-        private async Task OnMessage(string message)
-        {
-            await OnHandleRequest(JsonConvert.DeserializeObject<Request>(message));
-        }
-
         private async Task OnCLose(Exception ex)
         {
 
+        }
+
+
+        private async Task OnMessage(string message)
+        {
+            await OnHandleRequest(JsonConvert.DeserializeObject<Request>(message));
         }
 
 

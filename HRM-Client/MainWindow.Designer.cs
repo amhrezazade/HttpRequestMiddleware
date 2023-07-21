@@ -32,10 +32,13 @@
             txtLog = new TextBox();
             timer = new System.Windows.Forms.Timer(components);
             panel1 = new Panel();
+            button2 = new Button();
+            btnrestart = new Button();
             btnStart = new Button();
             lblState = new Label();
             label1 = new Label();
             pnlMain = new Panel();
+            notifyIcon = new NotifyIcon(components);
             panel1.SuspendLayout();
             pnlMain.SuspendLayout();
             SuspendLayout();
@@ -57,14 +60,36 @@
             // 
             // panel1
             // 
+            panel1.Controls.Add(button2);
+            panel1.Controls.Add(btnrestart);
             panel1.Controls.Add(btnStart);
             panel1.Controls.Add(lblState);
             panel1.Controls.Add(label1);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(356, 32);
+            panel1.Size = new Size(453, 32);
             panel1.TabIndex = 1;
+            // 
+            // button2
+            // 
+            button2.Location = new Point(319, 5);
+            button2.Name = "button2";
+            button2.Size = new Size(75, 23);
+            button2.TabIndex = 4;
+            button2.Text = "Exit";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
+            // btnrestart
+            // 
+            btnrestart.Location = new Point(238, 5);
+            btnrestart.Name = "btnrestart";
+            btnrestart.Size = new Size(75, 23);
+            btnrestart.TabIndex = 3;
+            btnrestart.Text = "Restart";
+            btnrestart.UseVisualStyleBackColor = true;
+            btnrestart.Click += btnrestart_Click;
             // 
             // btnStart
             // 
@@ -103,15 +128,22 @@
             pnlMain.Size = new Size(165, 88);
             pnlMain.TabIndex = 2;
             // 
+            // notifyIcon
+            // 
+            notifyIcon.Text = "notifyIcon1";
+            notifyIcon.Visible = true;
+            notifyIcon.MouseDoubleClick += notifyIcon_MouseDoubleClick;
+            // 
             // MainWindow
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(356, 212);
+            ClientSize = new Size(453, 212);
             Controls.Add(pnlMain);
             Controls.Add(panel1);
             Name = "MainWindow";
             Text = "HRM Client";
+            FormClosing += MainWindow_FormClosing;
             Load += mainWindow_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
@@ -129,5 +161,8 @@
         private Label label1;
         private Button btnStart;
         private Panel pnlMain;
+        private NotifyIcon notifyIcon;
+        private Button button2;
+        private Button btnrestart;
     }
 }

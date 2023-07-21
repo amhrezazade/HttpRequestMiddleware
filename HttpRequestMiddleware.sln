@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRM-Client", "HRM-Client\HRM-Client.csproj", "{1687DA24-62D3-4A88-9B98-84FB1D0565ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HRMServer", "HRMServer\HRMServer.csproj", "{33B1EC3E-0D26-4DA3-88A9-BE958D8515F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRMServer", "HRMServer\HRMServer.csproj", "{33B1EC3E-0D26-4DA3-88A9-BE958D8515F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HRMDomain", "HRMDomain\HRMDomain.csproj", "{3BC40340-36C6-431F-B833-C6B4BF0B1E4F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRMDomain", "HRMDomain\HRMDomain.csproj", "{3BC40340-36C6-431F-B833-C6B4BF0B1E4F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRMClientService", "HRMClientService\HRMClientService.csproj", "{5395FC03-5D34-437D-A542-7C311DC90D07}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1687DA24-62D3-4A88-9B98-84FB1D0565ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1687DA24-62D3-4A88-9B98-84FB1D0565ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1687DA24-62D3-4A88-9B98-84FB1D0565ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1687DA24-62D3-4A88-9B98-84FB1D0565ED}.Release|Any CPU.Build.0 = Release|Any CPU
 		{33B1EC3E-0D26-4DA3-88A9-BE958D8515F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{33B1EC3E-0D26-4DA3-88A9-BE958D8515F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33B1EC3E-0D26-4DA3-88A9-BE958D8515F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -27,6 +23,10 @@ Global
 		{3BC40340-36C6-431F-B833-C6B4BF0B1E4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3BC40340-36C6-431F-B833-C6B4BF0B1E4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3BC40340-36C6-431F-B833-C6B4BF0B1E4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5395FC03-5D34-437D-A542-7C311DC90D07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5395FC03-5D34-437D-A542-7C311DC90D07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5395FC03-5D34-437D-A542-7C311DC90D07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5395FC03-5D34-437D-A542-7C311DC90D07}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

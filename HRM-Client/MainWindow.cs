@@ -17,6 +17,7 @@ namespace HRM_Client
         public MainWindow()
         {
             InitializeComponent();
+            Visible = false;
             _hubService = new HubService();
             _requestService = new RequestService();
             _hubService.OnHandleRequest += HandleRequest;
@@ -48,6 +49,8 @@ namespace HRM_Client
             timer.Enabled = true;
             pnlMain.Dock = DockStyle.Fill;
             txtLog.Dock = DockStyle.Fill;
+            notifyIcon.Icon = Icon;
+
         }
 
         private async void timer_Tick(object sender, EventArgs e)
@@ -76,6 +79,28 @@ namespace HRM_Client
         private void lblState_TextChanged(object sender, EventArgs e)
         {
             Log("Hub Connection :" + lblState.Text);
+        }
+
+        private void notifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            Show();
+        }
+
+        private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+            Hide();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+            Environment.Exit(1);
+        }
+
+        private void btnrestart_Click(object sender, EventArgs e)
+        {
+            Application.Restart();
         }
     }
 }
