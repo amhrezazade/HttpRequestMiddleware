@@ -1,4 +1,5 @@
-﻿using HRMDomain.Model;
+﻿using HRMClientService.Models;
+using HRMDomain.Model;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 using System.Text;
@@ -8,7 +9,7 @@ namespace HRMClientService.Service
     public class RequestService
     {
         private JObject _hostMap;
-        public RequestService(ConfigHelperService configHelperService)
+        public RequestService(AppConfig configHelperService)
         {
             _hostMap = configHelperService.HostMapping;
         }
@@ -84,18 +85,15 @@ namespace HRMClientService.Service
 
 
 
-        private Method GetMethod(string method)
+        private Method GetMethod(string method) => method switch
         {
-            switch (method)
-            {
-                case "GET": return Method.Get;
-                case "POST": return Method.Post;
-                case "PUT": return Method.Put;
-                case "DELETE": return Method.Delete;
-                case "HEAD": return Method.Get;
-            }
-            return Method.Get;
-        }
+            "GET" => Method.Get,
+            "POST" => Method.Post,
+            "PUT" => Method.Put,
+            "DELETE" => Method.Delete,
+            "HEAD" => Method.Get,
+            _ => Method.Get,
+        };
 
     }
 }

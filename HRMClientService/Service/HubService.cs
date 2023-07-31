@@ -14,22 +14,22 @@ namespace HRMClientService.Service
 
         private HubConnection _hub;
 
-        public HubService(ConfigHelperService configHelperService, ILogger<HubService> logger)
+        public HubService(AppConfig configHelperService, ILogger<HubService> logger)
         {
             _logger = logger;
 
-            _hubInvokeFunctionName = configHelperService.AppConfig.HubInvokeFunctionName;
+            _hubInvokeFunctionName = configHelperService.HubInvokeFunctionName;
 
             _hub = new HubConnectionBuilder()
-            .WithUrl(configHelperService.AppConfig.HubURL, options =>
+            .WithUrl(configHelperService.HubURL, options =>
             {
-                options.Headers.Add("hubkey", configHelperService.AppConfig.HubKey);
+                options.Headers.Add("hubkey", configHelperService.HubKey);
             })
             .Build();
 
             _hub.Closed += OnCLose;
             _hub.Reconnected += OnConnect;
-            _hub.On<string>(configHelperService.AppConfig.HubListenFunctionName, OnMessage);
+            _hub.On<string>(configHelperService.HubListenFunctionName, OnMessage);
         }
 
         public event OnRequest OnHandleRequest;

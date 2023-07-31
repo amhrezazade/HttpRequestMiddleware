@@ -1,4 +1,5 @@
 using HRMClientService;
+using HRMClientService.Models;
 using HRMClientService.Service;
 
 IHost host = Host.CreateDefaultBuilder(args)
@@ -6,7 +7,7 @@ IHost host = Host.CreateDefaultBuilder(args)
     {      
         services.AddSingleton<RequestService>();
         services.AddSingleton<HubService>();
-        services.AddSingleton<ConfigHelperService>();
+        services.AddSingleton<AppConfig>();
         services.AddHostedService<ConnectionBackgroundService>();
     })
     .Build();

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,17 +11,21 @@ namespace HRMClientService.Models
     {
         public AppConfig(IConfiguration configuration) 
         {
+            HostMapping = JObject.Parse(File.ReadAllText("HostMap.json"));
             HubKey = configuration.GetSection("HubKey").Value;
             HubKeyHeaderName = configuration.GetSection("HubKeyHeaderName").Value;
             HubURL = configuration.GetSection("HubURL").Value;
             HubListenFunctionName = configuration.GetSection("HubListenFunctionName").Value;
             HubInvokeFunctionName = configuration.GetSection("HubInvokeFunctionName").Value;
+            LoopDelay = int.Parse(configuration.GetSection("LoopDelay").Value);
         }
 
-        public string HubURL { get; set; }
-        public string HubInvokeFunctionName { get; set; }
-        public string HubListenFunctionName { get; set; }
-        public string HubKey { get; set; }
-        public string HubKeyHeaderName { get; set; }
+        public string HubURL { get; }
+        public string HubInvokeFunctionName { get; }
+        public string HubListenFunctionName { get; }
+        public string HubKey { get; }
+        public string HubKeyHeaderName { get;}
+        public int LoopDelay { get; }
+        public JObject HostMapping { get; }
     }
 }
