@@ -8,6 +8,7 @@ builder.Services.AddSignalR();
 builder.Services.AddSingleton<RequestResponseHandlerService>();
 builder.Services.AddScoped<ReequestSenderMiddleware>();
 builder.Services.AddScoped<HubAuthenticationMiddleware>();
+builder.Services.AddScoped<TelegramService>();
 builder.Services.AddControllers();
 
 var app = builder.Build();
@@ -17,6 +18,7 @@ var app = builder.Build();
 app.UseMiddleware<HubAuthenticationMiddleware>();
 
 app.UseMiddleware<ReequestSenderMiddleware>();
+
 
 app.UseHttpsRedirection();
 
